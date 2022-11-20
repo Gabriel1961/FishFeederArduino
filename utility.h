@@ -13,5 +13,5 @@ int getNewJsonIdx(const String& str, int stidx)
     if(b && cnt == 0)
       return i+1;
   }
-  return -1;
+  return str.length();
 }
