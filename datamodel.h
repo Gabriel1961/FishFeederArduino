@@ -14,7 +14,7 @@ class DataModel
 {
   private:
   float mTemperature,mHumidity;
-  
+  float mTemperatures[24]{};
 
   void handlePostMessage(JSONVar& json,JSONVar& resp)
   {
@@ -40,6 +40,7 @@ class DataModel
     setTime(epoch);
     Serial.println("Time : year: " + String(year()) + " " + String(day()) + " " + String(hour()) + " " + String(minute()) + " " + String(second()));
   }
+
   void handleGetMessage(JSONVar& json,JSONVar& resp)
   {
     if(json.hasOwnProperty("get") == false) 
@@ -56,6 +57,11 @@ class DataModel
         if(strcmp(q[i],"temp")==0)
         {
           resp["temp"] = getTemperature();
+        }
+        else if(strcmp(q[i], "temps")==0) // handle request for the temps for the entire day
+        {
+          for(int j=0;j<24;j++)
+            resp["temps"][j] = mTemperatures[j];
         }
         else if(strcmp(q[i], "humidity")==0)
         {
@@ -117,6 +123,8 @@ class DataModel
     else {
       setHumidity(event.relative_humidity);
     }
+
+    mTemperatures[hour()] = mTemperature;
   }
 
   void update()

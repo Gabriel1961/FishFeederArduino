@@ -41,7 +41,9 @@ void loop() {
       JSONVar json = JSON.parse(data.c_str() + cidx);
       Serial.println(JSON.stringify(json));
       JSONVar resp = dataModel.processMessage(json);
-      Serial1.println(JSON.stringify(resp));
+      String respStr = JSON.stringify(resp);
+      if(respStr != "{}") // send if response isn't empty
+        Serial1.println(JSON.stringify(resp));
       cidx = nidx;
     }while(nidx != data.length());
   }
