@@ -32,7 +32,7 @@ class DailyFeedingEvent
     ranToday = true;
     digitalWrite(LED_BUILTIN, HIGH);
     Serial.println("Started feeding");
-    //motor.setSpeed(1);
+    motor.setSpeed(1);
   }
 
   void stop(Motor& motor)
@@ -40,7 +40,7 @@ class DailyFeedingEvent
     isRunning = false;
     Serial.println("Stopped feeding");
     digitalWrite(LED_BUILTIN, LOW);
-    //motor.setSpeed(0);
+    motor.setSpeed(0);
   }
 };
 

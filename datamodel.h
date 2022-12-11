@@ -9,7 +9,10 @@ enum MessageType
   GET=1,
   SYNC_TIME=2
 };
-
+/*
+Contains all the logic related to storing app specific data, and updating diffrent sensors and modules like FeedingScheduler
+and the tempreture and humidity sensors
+*/
 class DataModel
 {
   private:

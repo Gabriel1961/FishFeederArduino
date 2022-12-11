@@ -8,7 +8,7 @@
 int state = 0, flag = 0;
 const int TEMP_SENSOR_PIN = 50;
 DHT_Unified dht(TEMP_SENSOR_PIN, DHT11);
-Motor feedingMotor;
+Motor feedingMotor(12,13,14);
 #include "feedingScheduler.h"
 
 FeedingScheduler feedingScheduler(feedingMotor);
@@ -35,6 +35,7 @@ void loop() {
   if (Serial1.available() > 0) {
     // read messages comming from the bluetooth device 
     String data = Serial1.readString();
+    Serial.println("data");
     int cidx = 0, nidx;
     do { // if multiple messages come together, process each one individually 
       nidx = getNewJsonIdx(data, cidx);
